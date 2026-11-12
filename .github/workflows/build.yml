@@ -16,11 +16,8 @@ jobs:
           git clone --recursive https://github.com/theos/theos.git $HOME/theos
           echo "THEOS=$HOME/theos" >> $GITHUB_ENV
 
-      - name: Download iOS 17.0 SDK
-        run: |
-          cd $HOME/theos/sdks
-          curl -L -O https://github.com/theos/sdks/releases/download/iPhoneOS17.0.sdk/iPhoneOS17.0.sdk.tar.gz
-          tar -xf iPhoneOS17.0.sdk.tar.gz
+      - name: Install iOS 17.0 SDK (theos官方脚本)
+        run: $THEOS/bin/install-sdk 17.0
 
       - name: Build deb package
         run: make package
