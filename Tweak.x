@@ -4,7 +4,7 @@
 static void (*orig_setText)(id self, SEL _cmd, NSString *text);
 void hook_setText(id self, SEL _cmd, NSString *text) {
     if ([text isEqualToString:@"5G+"]) {
-        text = @"5GA";
+        text = @"5Gᴀ";
     }
     orig_setText(self, _cmd, text);
 }
