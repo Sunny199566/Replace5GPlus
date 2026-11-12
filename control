@@ -1,9 +1,9 @@
- Package: com.custom.replace5gplus
+Package: com.yourname.replace5gplus
 Name: Replace5GPlus
 Version: 1.0
-Architecture: iphoneos-arm64e
-Description: Replace statusbar "5G+" text to "5GA"
-Maintainer: Custom
-Author: Custom
+Architecture: iphoneos-arm64
+Description: 把状态栏5G+替换成5Gᴀ
+Maintainer: yourself
+Author: yourself
 Section: Tweaks
-Depends: mobilesubstrate, ellekit (>= 1.0)
+Depends: mobilesubstrate
