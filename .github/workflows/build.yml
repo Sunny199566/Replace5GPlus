@@ -5,9 +5,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: theos/theos-action@main
-        with:
-          platform: iphoneos
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y git curl perl make clang lld binutils
+
+      - name: Clone Theos
+        run: |
+          git clone --recursive https://github.com/theos/theos.git $HOME/theos
+          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
+
+      - name: Build deb package
+        run: make package
+
       - name: Upload deb
         uses: actions/upload-artifact@v4
         with:
