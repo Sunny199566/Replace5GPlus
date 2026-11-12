@@ -1,4 +1,4 @@
- name: Build Tweak
+name: Build Tweak
 on: push
 jobs:
   build:
