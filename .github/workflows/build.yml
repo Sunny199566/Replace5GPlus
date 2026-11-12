@@ -19,7 +19,7 @@ jobs:
       - name: Download iOS 17.0 SDK
         run: |
           cd $HOME/theos/sdks
-          curl -L -O https://github.com/theos/sdks/raw/master/iPhoneOS17.0.sdk.tar.gz
+          curl -L -O https://github.com/theos/sdks/releases/download/iPhoneOS17.0.sdk/iPhoneOS17.0.sdk.tar.gz
           tar -xf iPhoneOS17.0.sdk.tar.gz
 
       - name: Build deb package
