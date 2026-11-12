@@ -1,4 +1,5 @@
 #import <substrate.h>
+#import <Foundation/Foundation.h>
 
 %hook _UIStatusBarStringView
 - (void)setText:(id)arg1 {
