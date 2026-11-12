@@ -16,8 +16,8 @@ jobs:
           git clone --recursive https://github.com/theos/theos.git $HOME/theos
           echo "THEOS=$HOME/theos" >> $GITHUB_ENV
 
-      - name: Install iOS 17.2 SDK (theos官方脚本)
-        run: $THEOS/bin/install-sdk 17.0
+      - name: Install iOS 16.5 SDK
+        run: $THEOS/bin/install-sdk 16.5
 
       - name: Build deb package
         run: make package
