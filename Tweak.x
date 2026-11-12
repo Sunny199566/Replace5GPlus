@@ -1,17 +1,13 @@
 #import <substrate.h>
-#import <Foundation/Foundation.h>
 
-static void (*orig_setText)(id self, SEL _cmd, NSString *text);
-void hook_setText(id self, SEL _cmd, NSString *text) {
-    if ([text isEqualToString:@"5G+"]) {
-        text = @"5Gᴀ";
-    }
-    orig_setText(self, _cmd, text);
-}
+%hook _UIStatusBarStringView
 
-%ctor {
-    Class StatusBarTelephonyLabel = objc_getClass("StatusBarTelephonyLabel");
-    if (StatusBarTelephonyLabel) {
-        MSHookMessageEx(StatusBarTelephonyLabel, @selector(setText:), (IMP)hook_setText, (IMP *)&orig_setText);
+- (void)setText:(id)arg1 {
+    if ([arg1 isEqualToString:@"5G+"]) {
+        %orig(@"5Gᴀ");
+    } else {
+        %orig(arg1);
     }
 }
+
+%end
