@@ -6,21 +6,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Clone Theos
-        run: |
-          git clone --recursive https://github.com/theos/theos.git $HOME/theos
-          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
+      # 拉取theos本体
+      - name: Checkout Theos
+        uses: actions/checkout@v4
+        with:
+          repository: theos/theos
+          ref: master
+          submodules: recursive
+          path: theos
+      - name: Checkout SDK 14.5
+        uses: actions/checkout@v4
+        with:
+          repository: theos/sdks
+          sparse-checkout: iPhoneOS14.5.sdk
+          path: theos/sdks
 
-      - name: Download all patched SDKs
+      - name: Install dependencies
         run: |
-          cd $HOME/theos
-          curl -L -o sdks.zip https://github.com/theos/sdks/archive/master.zip
-          unzip -q sdks.zip
-          mv sdks-master/* sdks/
-          rm -rf sdks.zip sdks-master
+          brew install make ldid xz
+          echo "THEOS=$PWD/theos" >> $GITHUB_ENV
 
-      - name: Build deb package
-        run: make package
+      - name: Build deb
+        run: make package FINALPACKAGE=1
 
       - name: Upload deb
         uses: actions/upload-artifact@v4
