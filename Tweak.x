@@ -4,7 +4,7 @@
 %hook _UIStatusBarCellularItem
 - (id)primaryString {
     NSString *orig = %orig();
-    if ([orig isEqualToString:@"5G+"]) {
+    if ([orig isEqualToString:@"5G＋"]) {
         return @"5Gᴀ";
     }
     return orig;
