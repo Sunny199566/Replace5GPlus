@@ -1,13 +1,12 @@
 #import <substrate.h>
 #import <Foundation/Foundation.h>
 
-%hook _UIStatusBarStringView
-- (void)setText:(id)arg1 {
-    NSString *text = (NSString *)arg1;
-    if ([text isEqualToString:@"5G+"]) {
-        %orig(@"5Gᴀ");
-        return;
+%hook _UIStatusBarCellularItem
+- (id)primaryString {
+    NSString *orig = %orig();
+    if ([orig isEqualToString:@"5G+"]) {
+        return @"5Gᴀ";
     }
-    %orig(arg1);
+    return orig;
 }
 %end
